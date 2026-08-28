@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://audace-rabarison.dev/sitemap.xml
