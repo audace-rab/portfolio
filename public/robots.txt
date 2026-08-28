@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://audace-rabarison.dev/sitemap.xml
+Sitemap: https://audace-rab.github.io/portfolio/sitemap.xml

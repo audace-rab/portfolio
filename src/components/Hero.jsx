@@ -79,7 +79,7 @@ export default function Hero() {
                 {t.hero.viewExperience}
               </a>
               <a
-                href="/CV-Audace-Rabarison.pdf"
+                href={`${import.meta.env.BASE_URL}CV-Audace-Rabarison.pdf`}
                 download
                 className="px-7 py-3 rounded-full border-2 border-amber-600 dark:border-accent-violet text-amber-700 dark:text-slate-200 font-medium hover:bg-amber-50 dark:hover:bg-white/10 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-amber-500 dark:focus-visible:ring-accent-violet inline-flex items-center gap-2"
               >
