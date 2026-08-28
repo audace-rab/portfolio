@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { profile } from '../data'
 import TechMarquee from './TechMarquee'
 import AnimatedCounter from './AnimatedCounter'
-import portrait from '../assets/portrait.png'
+import portrait768 from '../assets/portrait-768.webp'
+import portrait384 from '../assets/portrait-384.webp'
 import { useLanguage } from '../contexts/LanguageContext'
 
 export default function Hero() {
@@ -123,14 +124,22 @@ export default function Hero() {
             <div className="relative">
               <div className="w-80 h-80 md:w-96 md:h-96 rounded-full p-1 bg-gradient-to-br from-amber-600 to-amber-800 dark:from-accent-blue dark:to-accent-violet animate-float shadow-lg shadow-amber-500/20 dark:shadow-accent-violet/30">
                 <div className="w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-amber-200 to-amber-400 portrait-dark-bg">
-                  <img
-                    src={portrait}
-                    alt={t.hero.portraitAlt}
-                    loading="lazy"
-                    width={384}
-                    height={384}
-                    className="w-full h-full object-cover object-[center_15%]"
-                  />
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcSet={portrait768}
+                      media="(min-width: 768px)"
+                    />
+                    <source type="image/webp" srcSet={portrait384} />
+                    <img
+                      src={portrait384}
+                      alt={t.hero.portraitAlt}
+                      loading="lazy"
+                      width={384}
+                      height={384}
+                      className="w-full h-full object-cover object-[center_15%]"
+                    />
+                  </picture>
                 </div>
               </div>
             </div>
