@@ -57,16 +57,6 @@ export default function Hero() {
             <p className="text-amber-700 dark:text-accent-cyan font-medium tracking-widest uppercase text-sm mb-4">
               {t.hero.hello}
             </p>
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs sm:text-sm font-medium border border-emerald-200 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 mb-3"
-              role="status"
-            >
-              <span className="relative flex h-2 w-2" aria-hidden="true">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 motion-reduce:animate-none" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-              {t.hero.available}
-            </div>
             <h1 className="text-[clamp(2.5rem,8vw,3.75rem)] font-extrabold text-slate-900 dark:text-white leading-tight">
               {profile.name}
             </h1>
@@ -76,7 +66,17 @@ export default function Hero() {
             <p className="text-slate-600 dark:text-slate-300 mt-5 max-w-md text-lg">
               {t.hero.tagline.replace('{years}', profile.experienceYears)}
             </p>
-            <div className="flex flex-wrap gap-4 mt-8">
+            <div
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs sm:text-sm font-medium border border-emerald-200 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 mt-6"
+              role="status"
+            >
+              <span className="relative flex h-2 w-2" aria-hidden="true">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 motion-reduce:animate-none" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+              {t.hero.available}
+            </div>
+            <div className="flex flex-wrap gap-4 mt-5">
               <a
                 href="#contact"
                 className="px-7 py-3 rounded-full bg-gradient-to-r from-amber-600 to-amber-800 dark:from-accent-blue dark:to-accent-violet text-white font-medium hover:opacity-90 transition-opacity glow focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-amber-500 dark:focus-visible:ring-accent-violet"

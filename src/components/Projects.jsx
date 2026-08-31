@@ -8,7 +8,7 @@ const projectMeta = [
     icon: '💼',
   },
   {
-    stack: ['React', 'Python', 'Fast API', 'Oracle', 'Jupyter Lab', 'TensorFlow'],
+    stack: ['React', 'Python', 'FastAPI', 'Oracle', 'Jupyter Lab', 'TensorFlow'],
     icon: '🤖',
   },
   {

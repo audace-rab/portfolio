@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f172a" />
     <meta name="robots" content="noindex" />
     <title>404 — Page introuvable | Audace Rabarison</title>
     <style>
@@ -73,6 +74,7 @@
     <script>
       ;(function () {
         var lang = (navigator.language || 'fr').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en'
+        document.documentElement.lang = lang
         ;[].forEach.call(document.querySelectorAll('.' + lang), function (el) {
           el.style.display = 'block'
         })

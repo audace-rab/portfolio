@@ -37,7 +37,7 @@
     @apply bg-white/5 border-white/10 shadow-none;
   }
   .glow {
-    box-shadow: 0 10px 40px rgba(146, 64, 14, 0.2);
+    box-shadow: 0 10px 40px rgba(217, 119, 6, 0.2);
   }
   .dark .glow {
     box-shadow: 0 0 40px rgba(139, 92, 246, 0.25);
@@ -90,8 +90,11 @@
     }
   }
 
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
+  /* float scoped to desktop — avoid perpetual motion on mobile */
+  @media (min-width: 768px) {
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
   }
 }
 
