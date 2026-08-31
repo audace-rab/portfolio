@@ -101,6 +101,12 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
+          <a
+            href="#contact"
+            className="text-sm font-medium px-5 py-2 rounded-full bg-gradient-to-r from-amber-600 to-amber-800 dark:from-accent-blue dark:to-accent-violet text-white hover:opacity-90 transition-opacity focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-amber-500 dark:focus-visible:ring-accent-violet"
+          >
+            {t.nav.letsTalk}
+          </a>
           <button
             type="button"
             onClick={toggleLang}
@@ -123,12 +129,6 @@ export default function Navbar() {
           >
             <span aria-hidden="true">{theme === 'dark' ? '☀️' : '🌙'}</span>
           </button>
-          <a
-            href="#contact"
-            className="text-sm font-medium px-5 py-2 rounded-full bg-gradient-to-r from-amber-600 to-amber-800 dark:from-accent-blue dark:to-accent-violet text-white hover:opacity-90 transition-opacity focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-amber-500 dark:focus-visible:ring-accent-violet"
-          >
-            {t.nav.letsTalk}
-          </a>
         </div>
 
         <div className="flex md:hidden items-center gap-3">
