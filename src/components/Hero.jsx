@@ -57,6 +57,16 @@ export default function Hero() {
             <p className="text-amber-700 dark:text-accent-cyan font-medium tracking-widest uppercase text-sm mb-4">
               {t.hero.hello}
             </p>
+            <div
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs sm:text-sm font-medium border border-emerald-200 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 mb-3"
+              role="status"
+            >
+              <span className="relative flex h-2 w-2" aria-hidden="true">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 motion-reduce:animate-none" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+              {t.hero.available}
+            </div>
             <h1 className="text-[clamp(2.5rem,8vw,3.75rem)] font-extrabold text-slate-900 dark:text-white leading-tight">
               {profile.name}
             </h1>
@@ -134,7 +144,8 @@ export default function Hero() {
                     <img
                       src={portrait384}
                       alt={t.hero.portraitAlt}
-                      loading="lazy"
+                      fetchPriority="high"
+                      decoding="async"
                       width={384}
                       height={384}
                       className="w-full h-full object-cover object-[center_15%]"

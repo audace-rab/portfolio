@@ -31,6 +31,7 @@ export default {
       { label: 'Technologies maîtrisées' },
     ],
     portraitAlt: 'Portrait de Audace Rabarison',
+    available: 'Disponible pour de nouvelles opportunités',
   },
   about: {
     kicker: 'À propos',

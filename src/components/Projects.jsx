@@ -25,11 +25,10 @@ function ProjectCard({ p }) {
   const cardRef = useRef(null)
   const [tilt, setTilt] = useState({ rx: 0, ry: 0 })
   const [spot, setSpot] = useState({ x: 50, y: 50 })
-  const [reduced, setReduced] = useState(
+  const reduced =
     typeof window !== 'undefined' &&
-      (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-        window.matchMedia('(pointer: coarse)').matches),
-  )
+    (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      window.matchMedia('(pointer: coarse)').matches)
 
   const onMove = (e) => {
     const el = cardRef.current
