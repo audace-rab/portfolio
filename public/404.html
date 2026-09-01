@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0f172a" />
     <meta name="robots" content="noindex" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; object-src 'none'; frame-src 'none'; form-action 'self'" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>404 — Page introuvable | Audace Rabarison</title>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -71,14 +73,6 @@
       <p class="en">Oops! The page you are looking for does not exist or has been moved.</p>
       <a class="btn" href="/portfolio/">Retour à l'accueil · Back home</a>
     </main>
-    <script>
-      ;(function () {
-        var lang = (navigator.language || 'fr').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en'
-        document.documentElement.lang = lang
-        ;[].forEach.call(document.querySelectorAll('.' + lang), function (el) {
-          el.style.display = 'block'
-        })
-      })()
-    </script>
+    <script defer src="/portfolio/404-lang.js"></script>
   </body>
 </html>
