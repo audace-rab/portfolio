@@ -237,6 +237,7 @@ export default function Contact() {
                   required
                   aria-required="true"
                   aria-invalid={errors.name ? 'true' : 'false'}
+                  aria-describedby={errors.name ? 'contact-name-error' : undefined}
                   value={form.name}
                   onChange={handleChange}
                   className={`w-full px-4 py-3 rounded-xl bg-slate-50 border text-slate-900 placeholder-slate-400 focus:outline-none focus-visible:ring-2 dark:bg-white/5 dark:text-white ${
@@ -247,7 +248,7 @@ export default function Contact() {
                   placeholder={t.contact.namePlaceholder}
                 />
                 {errors.name && (
-                  <p className="mt-1 text-xs text-red-500 dark:text-red-400">{errors.name}</p>
+                  <p id="contact-name-error" className="mt-1 text-xs text-red-500 dark:text-red-400">{errors.name}</p>
                 )}
               </div>
               <div>
@@ -262,6 +263,7 @@ export default function Contact() {
                   required
                   aria-required="true"
                   aria-invalid={errors.email ? 'true' : 'false'}
+                  aria-describedby={errors.email ? 'contact-email-error' : undefined}
                   value={form.email}
                   onChange={handleChange}
                   className={`w-full px-4 py-3 rounded-xl bg-slate-50 border text-slate-900 placeholder-slate-400 focus:outline-none focus-visible:ring-2 dark:bg-white/5 dark:text-white ${
@@ -272,7 +274,7 @@ export default function Contact() {
                   placeholder={t.contact.emailPlaceholder}
                 />
                 {errors.email && (
-                  <p className="mt-1 text-xs text-red-500 dark:text-red-400">{errors.email}</p>
+                  <p id="contact-email-error" className="mt-1 text-xs text-red-500 dark:text-red-400">{errors.email}</p>
                 )}
               </div>
               <div>
@@ -286,6 +288,7 @@ export default function Contact() {
                   required
                   aria-required="true"
                   aria-invalid={errors.message ? 'true' : 'false'}
+                  aria-describedby={errors.message ? 'contact-message-error' : undefined}
                   rows="4"
                   value={form.message}
                   onChange={handleChange}
@@ -297,7 +300,7 @@ export default function Contact() {
                   placeholder={t.contact.messagePlaceholder}
                 />
                 {errors.message && (
-                  <p className="mt-1 text-xs text-red-500 dark:text-red-400">{errors.message}</p>
+                  <p id="contact-message-error" className="mt-1 text-xs text-red-500 dark:text-red-400">{errors.message}</p>
                 )}
               </div>
               {TURNSTILE_SITE_KEY && (

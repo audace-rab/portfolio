@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="bg-white text-slate-600 dark:bg-base dark:text-slate-300 min-h-screen">
       <a href="#contenu" className="a11y-skip">
-        Aller au contenu
+        {t.nav.skipLink}
       </a>
       <ScrollProgressBar />
       <Navbar />

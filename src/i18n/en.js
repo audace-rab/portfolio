@@ -16,6 +16,7 @@ export default {
     lightTheme: 'Switch to light mode',
     darkTheme: 'Switch to dark mode',
     changeLanguage: 'Change language',
+    skipLink: 'Skip to content',
   },
   hero: {
     hello: "Hello, I'm",

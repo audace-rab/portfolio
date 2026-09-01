@@ -25,7 +25,7 @@ export default function Skills() {
                   <div key={item.name}>
                     <div className="flex items-center justify-between text-sm mb-1">
                       <span className="text-slate-600 dark:text-slate-300">{item.name}</span>
-                      <span className="text-xs text-slate-400 dark:text-slate-400">
+                      <span className="text-xs text-slate-500 dark:text-slate-400">
                         {item.proficiency}%
                       </span>
                     </div>

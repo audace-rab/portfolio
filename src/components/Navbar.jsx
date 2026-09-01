@@ -110,7 +110,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={toggleLang}
-            aria-label={t.nav.changeLanguage}
+            aria-label={`FR|EN — ${t.nav.changeLanguage}`}
             className="text-sm font-semibold flex items-center gap-1 px-2 py-1 rounded-full glass focus-visible:ring-2 focus-visible:ring-amber-500 dark:focus-visible:ring-accent-violet"
           >
             <span className={lang === 'fr' ? 'text-amber-700 dark:text-accent-cyan' : 'text-slate-500 dark:text-slate-400'}>
@@ -135,7 +135,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={toggleLang}
-            aria-label={t.nav.changeLanguage}
+            aria-label={`FR|EN — ${t.nav.changeLanguage}`}
             className="text-sm font-semibold flex items-center gap-1 px-2 py-1 rounded-full glass focus-visible:ring-2 focus-visible:ring-amber-500 dark:focus-visible:ring-accent-violet"
           >
             <span className={lang === 'fr' ? 'text-amber-700 dark:text-accent-cyan' : 'text-slate-500 dark:text-slate-400'}>
