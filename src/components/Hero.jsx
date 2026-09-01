@@ -40,6 +40,7 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+      <link rel="preload" as="image" imagesrcset={`${portrait768} 768w, ${portrait384} 384w`} imageSizes="(min-width: 768px) 24rem, 20rem" />
       <div
         ref={blobRef}
         className="absolute inset-0 pointer-events-none"
