@@ -3,8 +3,8 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
-// Vercel sert le site à la racine ; GitHub Pages sous /portfolio/
-const base = process.env.VERCEL ? '/' : '/portfolio/'
+// Hébergé sur Vercel, servi à la racine
+const base = '/'
 
 export default defineConfig({
   plugins: [
