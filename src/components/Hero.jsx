@@ -1,165 +1,148 @@
-import { useEffect, useRef, useState } from 'react'
-import { profile } from '../data'
-import TechMarquee from './TechMarquee'
+import { profile, experiences, keyTechnologies } from '../data'
 import AnimatedCounter from './AnimatedCounter'
+import Icon from './Icon'
 import portrait768 from '../assets/portrait-768.webp'
 import portrait384 from '../assets/portrait-384.webp'
 import { useLanguage } from '../contexts/LanguageContext'
 
 export default function Hero() {
   const { t } = useLanguage()
-  const [offset, setOffset] = useState(0)
-  const blobRef = useRef(null)
+  const years = profile.experienceYears
 
   const stats = [
-    { icon: '⚡', value: 5, suffix: '+', label: t.hero.stats[0].label },
-    { icon: '🚀', value: 10, suffix: '+', label: t.hero.stats[1].label },
-    { icon: '🛠️', value: 5, suffix: '+', label: t.hero.stats[2].label },
+    { icon: 'history', value: Number(years), suffix: '+', label: t.hero.stats[0].label },
+    { icon: 'layers', value: 10, suffix: '+', label: t.hero.stats[1].label },
+    { icon: 'briefcase', value: experiences.length, suffix: '', label: t.hero.stats[2].label },
   ]
 
-
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0
-    if (mq.matches || isTouch) return
-
-    let raf = 0
-    const update = () => {
-      setOffset(window.scrollY * 0.05)
-      raf = 0
-    }
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(update)
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      if (raf) cancelAnimationFrame(raf)
-    }
-  }, [])
-
   return (
-    <section id="home" className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-      <link rel="preload" as="image" imagesrcset={`${portrait768} 768w, ${portrait384} 384w`} imageSizes="(min-width: 768px) 24rem, 20rem" />
-      <div
-        ref={blobRef}
-        className="absolute inset-0 pointer-events-none"
-        style={{ transform: `translateY(${offset}px)` }}
-        aria-hidden="true"
-      >
-        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-amber-100 dark:bg-accent-violet/20 blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-[28rem] h-[28rem] rounded-full bg-amber-100 dark:bg-accent-blue/20 blur-3xl" />
-        <div className="absolute top-1/3 right-1/4 w-40 h-40 rounded-full bg-amber-100 dark:bg-accent-cyan/20 blur-2xl animate-float" />
-      </div>
-
-      <div className="relative max-w-6xl mx-auto w-full px-6 py-24">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="animate-fade-up">
-            <p className="text-amber-700 dark:text-accent-cyan font-medium tracking-widest uppercase text-sm mb-4">
-              {t.hero.hello}
-            </p>
-            <h1 className="text-[clamp(2.5rem,8vw,3.75rem)] font-extrabold text-slate-900 dark:text-white leading-tight">
-              {profile.name}
-            </h1>
-            <h2 className="text-2xl md:text-3xl font-semibold text-gradient mt-3">
-              {t.hero.title}
-            </h2>
-            <p className="text-slate-600 dark:text-slate-300 mt-5 max-w-md text-lg">
-              {t.hero.tagline.replace('{years}', profile.experienceYears)}
-            </p>
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs sm:text-sm font-medium border border-emerald-200 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 mt-6"
-              role="status"
-            >
-              <span className="relative flex h-2 w-2" aria-hidden="true">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 motion-reduce:animate-none" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-              {t.hero.available}
-            </div>
-            <div className="flex flex-wrap gap-4 mt-5">
-              <a
-                href="#contact"
-                className="px-7 py-3 rounded-full bg-gradient-to-r from-amber-600 to-amber-800 dark:from-accent-blue dark:to-accent-violet text-white font-medium hover:opacity-90 transition-opacity glow focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-amber-500 dark:focus-visible:ring-accent-violet"
-              >
-                {t.hero.contact}
-              </a>
-              <a
-                href="#experience"
-                className="px-7 py-3 rounded-full glass text-slate-800 dark:text-slate-200 font-medium hover:bg-slate-50 dark:hover:bg-white/10 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-amber-500 dark:focus-visible:ring-accent-violet"
-              >
-                {t.hero.viewExperience}
-              </a>
-              <a
-                href={`${import.meta.env.BASE_URL}CV-Audace-Rabarison.pdf`}
-                download
-                className="px-7 py-3 rounded-full border-2 border-amber-600 dark:border-accent-violet text-amber-700 dark:text-slate-200 font-medium hover:bg-amber-50 dark:hover:bg-white/10 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-amber-500 dark:focus-visible:ring-accent-violet inline-flex items-center gap-2"
-              >
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                  />
-                </svg>
-                {t.hero.downloadCv}
-              </a>
-            </div>
-
-            <div className="grid grid-cols-3 gap-4 mt-10 max-w-md">
-              {stats.map((s) => (
-                <div key={s.label} className="glass rounded-2xl p-4 text-center">
-                  <span className="block text-2xl mb-1" aria-hidden="true">
-                    {s.icon}
-                  </span>
-                  <p className="text-2xl font-bold text-gradient">
-                    <AnimatedCounter value={s.value} />
-                    {s.suffix}
-                  </p>
-                  <p className="text-xs text-slate-600 dark:text-slate-300 mt-1">{s.label}</p>
-                </div>
-              ))}
-            </div>
+    <section id="home" className="container-page pt-32 pb-12">
+      <link
+        rel="preload"
+        as="image"
+        imageSrcSet={`${portrait768} 768w, ${portrait384} 384w`}
+        imageSizes="14rem"
+      />
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div className="lg:col-span-7 flex flex-col gap-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-paper border border-hairline w-fit">
+            <span className="w-2 h-2 rounded-full bg-cobalt" aria-hidden="true" />
+            <span className="label-mono text-graphite">{t.hero.badge.replace('{years}', years)}</span>
           </div>
 
-          <div className="flex justify-center md:justify-end">
-            <div className="relative">
-              <div className="w-80 h-80 md:w-96 md:h-96 rounded-full p-1 bg-gradient-to-br from-amber-600 to-amber-800 dark:from-accent-blue dark:to-accent-violet animate-float shadow-lg shadow-amber-500/20 dark:shadow-accent-violet/30">
-                <div className="w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-amber-200 to-amber-400 portrait-dark-bg">
-                  <picture>
-                    <source
-                      type="image/webp"
-                      srcSet={portrait768}
-                      media="(min-width: 768px)"
-                    />
-                    <source type="image/webp" srcSet={portrait384} />
-                    <img
-                      src={portrait384}
-                      alt={t.hero.portraitAlt}
-                      fetchPriority="high"
-                      decoding="async"
-                      width={384}
-                      height={384}
-                      className="w-full h-full object-cover object-[center_15%]"
-                    />
-                  </picture>
-                </div>
+          <div className="flex flex-col gap-2">
+            <span className="kicker">{t.hero.hello}</span>
+            <h1 className="font-serif text-5xl sm:text-6xl font-bold text-graphite tracking-tight leading-[1.05]">
+              {profile.name}
+            </h1>
+            <p className="text-lg sm:text-xl text-muted font-medium mt-1">{t.hero.subtitle}</p>
+          </div>
+
+          <p className="text-base text-muted leading-relaxed max-w-xl">
+            {t.hero.paragraph.replace('{years}', years)}
+          </p>
+
+          <div className="flex flex-wrap items-center gap-3 pt-1">
+            <a href="#projects" className="btn-primary">
+              {t.hero.exploreProjects}
+              <Icon name="arrowDown" size={18} />
+            </a>
+            <a href="#contact" className="btn-ghost">
+              <Icon name="chat" size={18} className="text-cobalt" />
+              {t.hero.contact}
+            </a>
+            <a
+              href={`${import.meta.env.BASE_URL}CV-Audace-Rabarison.pdf`}
+              download
+              className="btn-ghost"
+            >
+              <Icon name="download" size={18} className="text-cobalt" />
+              {t.hero.downloadCv}
+            </a>
+            <a
+              href={profile.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="p-3 rounded-lg bg-paper border border-hairline text-muted hover:text-cobalt transition-colors"
+            >
+              <Icon name="linkedin" size={18} />
+            </a>
+          </div>
+
+          <dl className="grid grid-cols-3 gap-3 pt-4 max-w-md">
+            {stats.map((s) => (
+              <div key={s.label} className="flex flex-col-reverse p-3.5 rounded-xl bg-paper border border-hairline">
+                <dt className="label-mono mt-1">{s.label}</dt>
+                <dd className="flex items-center gap-1.5">
+                  <Icon name={s.icon} size={16} className="text-cobalt" />
+                  <span className="font-serif text-2xl font-bold text-graphite">
+                    <AnimatedCounter value={s.value} />
+                    {s.suffix}
+                  </span>
+                </dd>
               </div>
+            ))}
+          </dl>
+        </div>
+
+        <div className="lg:col-span-5 flex justify-center">
+          <div className="relative w-full max-w-md aspect-square rounded-2xl bg-paper border border-hairline p-5 flex flex-col justify-between overflow-hidden">
+            <div className="flex items-center justify-between" aria-hidden="true">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-hairline" />
+                <span className="w-2.5 h-2.5 rounded-full bg-gray-300" />
+                <span className="w-2.5 h-2.5 rounded-full bg-gray-400" />
+              </div>
+              <span className="font-mono text-xs text-subtle uppercase">Audace_Profile.cs</span>
+            </div>
+
+            <div className="mx-auto my-auto w-48 h-48 sm:w-56 sm:h-56 rounded-full p-1 border border-hairline bg-chalk">
+              <div className="w-full h-full rounded-full overflow-hidden bg-paper">
+                <picture>
+                  <source type="image/webp" srcSet={portrait768} media="(min-width: 768px)" />
+                  <source type="image/webp" srcSet={portrait384} />
+                  <img
+                    src={portrait384}
+                    alt={t.hero.portraitAlt}
+                    fetchPriority="high"
+                    decoding="async"
+                    width={384}
+                    height={384}
+                    className="w-full h-full object-cover object-[center_15%]"
+                  />
+                </picture>
+              </div>
+            </div>
+
+            <div className="p-3 rounded-xl bg-chalk border border-hairline flex items-center justify-between gap-2" role="status">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="w-2 h-2 rounded-full bg-cobalt shrink-0" aria-hidden="true" />
+                <span className="font-mono text-xs text-graphite truncate">{t.hero.available}</span>
+              </div>
+              <span className="font-mono text-xs text-cobalt bg-paper border border-hairline px-2 py-0.5 rounded shrink-0" aria-hidden="true">
+                {t.hero.availableShort}
+              </span>
             </div>
           </div>
         </div>
       </div>
 
-      <TechMarquee />
+      <div className="mt-12 p-5 rounded-xl bg-paper border border-hairline flex flex-wrap items-center justify-between gap-4">
+        <span className="label-mono">{t.hero.techKicker}</span>
+        <ul className="flex flex-wrap items-center gap-2 font-mono text-xs">
+          {keyTechnologies.map((tech, i) => (
+            <li
+              key={tech}
+              className={`px-3 py-1 rounded-md bg-chalk border border-hairline ${
+                i === 0 ? 'text-graphite font-semibold' : 'text-muted'
+              }`}
+            >
+              {tech}
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   )
 }

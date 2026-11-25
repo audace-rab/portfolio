@@ -17,8 +17,8 @@ export default defineConfig({
         start_url: '/portfolio/',
         scope: '/portfolio/',
         display: 'standalone',
-        theme_color: '#0f172a',
-        background_color: '#0f172a',
+        theme_color: '#F9F9FB',
+        background_color: '#F9F9FB',
         id: '/portfolio/',
         icons: [
           { src: '/portfolio/pwa-192x192.png', sizes: '192x192', type: 'image/png' },

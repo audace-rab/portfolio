@@ -42,26 +42,26 @@ export default function CookieConsent() {
       role="dialog"
       aria-modal="true"
       aria-label={t.cookies.intro}
-      className="fixed bottom-4 inset-x-4 sm:left-1/2 sm:-translate-x-1/2 sm:max-w-2xl z-[120] glass rounded-2xl p-6 shadow-2xl"
+      className="fixed bottom-4 inset-x-4 sm:left-1/2 sm:-translate-x-1/2 sm:max-w-2xl z-[120] card p-6 shadow-xl"
     >
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
         <div className="flex-1">
-          <p className="font-semibold text-slate-900 dark:text-white">{t.cookies.intro}</p>
-          <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{t.cookies.description}</p>
+          <p className="font-serif text-lg font-bold text-graphite">{t.cookies.intro}</p>
+          <p className="mt-1 text-sm text-muted">{t.cookies.description}</p>
         </div>
         <div className="flex gap-3 shrink-0">
           <button
             type="button"
             ref={acceptRef}
             onClick={acceptCookies}
-            className="px-5 py-2 rounded-full bg-gradient-to-r from-amber-600 to-amber-800 dark:from-accent-blue dark:to-accent-violet text-white text-sm font-medium hover:opacity-90 transition-opacity focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-amber-500 dark:focus-visible:ring-accent-violet"
+            className="btn px-5 py-2 bg-cobalt text-white hover:bg-cobalt-hover"
           >
             {t.cookies.accept}
           </button>
           <button
             type="button"
             onClick={declineCookies}
-            className="px-5 py-2 rounded-full glass text-slate-800 dark:text-slate-200 text-sm font-medium hover:bg-slate-50 dark:hover:bg-white/10 transition-colors focus-visible:ring-2 focus-visible:ring-amber-500 dark:focus-visible:ring-accent-violet"
+            className="btn px-5 py-2 bg-paper border border-hairline text-graphite hover:bg-chalk"
           >
             {t.cookies.decline}
           </button>

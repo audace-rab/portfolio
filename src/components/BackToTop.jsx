@@ -19,7 +19,7 @@ export default function BackToTop() {
       type="button"
       aria-label={t.footer.backToTop}
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      className={`fixed bottom-6 right-6 z-[90] w-12 h-12 rounded-full glass flex items-center justify-center text-slate-800 dark:text-slate-200 shadow-lg shadow-slate-900/10 dark:shadow-black/40 hover:scale-110 focus-visible:ring-2 focus-visible:ring-amber-500 dark:focus-visible:ring-accent-violet transition-all duration-300 ${
+      className={`fixed bottom-6 right-6 z-[30] w-11 h-11 rounded-xl bg-paper border border-hairline flex items-center justify-center text-graphite shadow-sm hover:border-graphite hover:text-cobalt transition-all duration-300 ${
         visible ? 'opacity-100 translate-y-0' : 'opacity-0 pointer-events-none translate-y-4'
       }`}
       aria-hidden={!visible}

@@ -1,132 +1,128 @@
 import { useRef, useState } from 'react'
 import Reveal from './Reveal'
+import Icon from './Icon'
+import SectionHeader from './SectionHeader'
+import ProjectDrawer from './ProjectDrawer'
+import { projects as projectMeta } from '../data'
 import { useLanguage } from '../contexts/LanguageContext'
 
-const projectMeta = [
-  {
-    stack: ['C#', '.NET', 'SQL Server', 'Angular', 'TypeScript'],
-    icon: '💼',
-  },
-  {
-    stack: ['React', 'Python', 'FastAPI', 'Oracle', 'Jupyter Lab', 'TensorFlow'],
-    icon: '🤖',
-  },
-  {
-    stack: ['C#', '.NET', '.NET Framework', 'Vue.js', 'Oracle', 'TDump Studio'],
-    icon: '🎫',
-  },
-  {
-    stack: ['C#', '.NET', 'SQL Server', 'React'],
-    icon: '📄',
-  },
-]
+const FILTERS = ['all', 'enterprise', 'transport', 'ai']
 
-function ProjectCard({ p }) {
-  const cardRef = useRef(null)
-  const [tilt, setTilt] = useState({ rx: 0, ry: 0 })
-  const [spot, setSpot] = useState({ x: 50, y: 50 })
-  const reduced =
-    typeof window !== 'undefined' &&
-    (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-      window.matchMedia('(pointer: coarse)').matches)
-
-  const onMove = (e) => {
-    const el = cardRef.current
-    if (!el || reduced) return
-    const rect = el.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-    const px = x / rect.width
-    const py = y / rect.height
-    setTilt({ rx: (0.5 - py) * 8, ry: (px - 0.5) * 8 })
-    setSpot({ x: px * 100, y: py * 100 })
-  }
-
-  const onLeave = () => {
-    setTilt({ rx: 0, ry: 0 })
-    setSpot({ x: 50, y: 50 })
-  }
-
+function ProjectCard({ p, onOpen, viewDetail }) {
   return (
-    <Reveal>
-      <div
-        ref={cardRef}
-        onMouseMove={onMove}
-        onMouseLeave={onLeave}
-        style={{
-          transform: reduced
-            ? undefined
-            : `perspective(900px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`,
-        }}
-        className={`project-card glass rounded-3xl p-6 flex flex-col gap-4 hover:shadow-xl dark:hover:bg-white/10 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-amber-500 dark:focus-visible:ring-accent-violet ${
-          reduced ? '' : 'transition-transform duration-200 will-change-transform relative'
-        }`}
-      >
-        {!reduced && (
-          <div
-            className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            style={{
-              opacity: tilt.rx === 0 && tilt.ry === 0 ? 0 : 1,
-              background: `radial-gradient(300px circle at ${spot.x}% ${spot.y}%, rgba(245,158,11,0.12) 0%, transparent 60%)`,
-            }}
-            aria-hidden="true"
-          />
-        )}
-        <div className="flex items-center gap-3 relative">
-          <span
-            className="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-accent-violet/10 flex items-center justify-center text-2xl"
-            aria-hidden="true"
-          >
-            {p.icon}
+    <article className="group relative flex flex-col justify-between p-7 card-interactive">
+      <div className="flex flex-col gap-5">
+        <div className="flex items-center justify-between gap-3">
+          <div className="icon-tile">
+            <Icon name={p.icon} size={22} />
+          </div>
+          <span className="font-mono text-xs px-2.5 py-1 rounded bg-chalk border border-hairline text-muted font-medium">
+            {p.categoryLabel}
           </span>
-          <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-            {p.title}
-          </h3>
         </div>
-        <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed relative">
-          {p.description}
-        </p>
-        <p className="text-xs text-slate-500 dark:text-slate-400 relative">{p.role}</p>
-        <div className="flex flex-wrap gap-2 mt-auto relative">
-          {p.stack.map((t) => (
-            <span
-              key={t}
-              className="tech-badge text-xs px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 dark:bg-accent-violet/10 dark:border-accent-violet/30 dark:text-slate-200"
-            >
-              {t}
-            </span>
+        <div className="flex flex-col gap-2">
+          <h3 className="font-serif text-2xl text-graphite font-bold">{p.title}</h3>
+          <p className="text-sm text-muted leading-relaxed line-clamp-2">{p.description}</p>
+        </div>
+        <div className="p-3 rounded-lg bg-chalk border border-hairline flex flex-wrap items-center justify-between gap-2 text-muted font-mono text-xs">
+          <span>{p.stack.slice(0, 2).join(' + ')}</span>
+          <span className="text-graphite font-semibold">{p.role}</span>
+        </div>
+        <ul className="flex flex-wrap gap-1.5">
+          {p.stack.map((tech) => (
+            <li key={tech} className="chip">
+              {tech}
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
-    </Reveal>
+      <div className="mt-6 pt-4 border-t border-hairline">
+        <button
+          type="button"
+          onClick={onOpen}
+          aria-haspopup="dialog"
+          className="w-full flex items-center justify-between text-cobalt text-sm font-semibold rounded after:absolute after:inset-0 after:rounded-2xl after:content-['']"
+        >
+          <span className="group-hover:underline">
+            {viewDetail}
+            <span className="sr-only"> — {p.title}</span>
+          </span>
+          <Icon name="arrowRight" size={18} className="transition-transform group-hover:translate-x-1" />
+        </button>
+      </div>
+    </article>
   )
 }
 
 export default function Projects() {
   const { t } = useLanguage()
+  const [filter, setFilter] = useState('all')
+  const [openIndex, setOpenIndex] = useState(null)
+  const triggerRef = useRef(null)
+
   const projects = t.projects.data.map((p, i) => ({
     ...p,
-    stack: projectMeta[i].stack,
-    icon: projectMeta[i].icon,
+    ...projectMeta[i],
+    categoryLabel: t.projects.filters[projectMeta[i].category],
   }))
+
+  const count = (f) => (f === 'all' ? projects.length : projects.filter((p) => p.category === f).length)
+  const visible = filter === 'all' ? projects : projects.filter((p) => p.category === filter)
+
+  const open = (index) => {
+    triggerRef.current = document.activeElement
+    setOpenIndex(index)
+  }
+  const close = ({ restoreFocus = true } = {}) => {
+    setOpenIndex(null)
+    if (restoreFocus) triggerRef.current?.focus?.()
+  }
+
   return (
-    <section id="projects" className="py-24">
-      <div className="max-w-6xl mx-auto px-6">
-        <Reveal>
-          <h3 className="text-amber-700 dark:text-accent-cyan font-medium tracking-widest uppercase text-sm mb-2">
-            {t.projects.kicker}
-          </h3>
-          <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-12">
-            {t.projects.title}
-          </h2>
+    <section id="projects" className="section" aria-labelledby="projects-title">
+      <div className="container-page">
+        <Reveal className="flex flex-col gap-6 mb-10">
+          <SectionHeader
+            id="projects-title"
+            kicker={t.projects.kicker}
+            title={t.projects.title}
+            intro={t.projects.intro}
+          />
+          <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-hairline" role="group" aria-label={t.projects.filterLabel}>
+            <span className="font-mono text-xs text-subtle uppercase mr-2" aria-hidden="true">
+              {t.projects.filterLabel}
+            </span>
+            {FILTERS.filter((f) => count(f) > 0).map((f) => (
+              <button
+                key={f}
+                type="button"
+                onClick={() => setFilter(f)}
+                aria-pressed={filter === f}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-mono border transition-all ${
+                  filter === f
+                    ? 'bg-graphite text-white border-graphite'
+                    : 'bg-paper text-muted border-hairline hover:border-graphite hover:text-graphite'
+                }`}
+              >
+                {t.projects.filters[f]} ({count(f)})
+              </button>
+            ))}
+          </div>
         </Reveal>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {projects.map((p) => (
-            <ProjectCard key={p.title} p={p} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {visible.map((p) => (
+            <ProjectCard
+              key={p.id}
+              p={p}
+              viewDetail={t.projects.viewDetail}
+              onOpen={() => open(projects.indexOf(p))}
+            />
           ))}
         </div>
       </div>
+
+      {openIndex !== null && <ProjectDrawer project={projects[openIndex]} onClose={close} />}
     </section>
   )
 }

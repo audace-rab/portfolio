@@ -5,6 +5,9 @@ export const profile = {
   email: 'audacerabarison@gmail.com',
   phone: '+261 34 76 509 18',
   address: 'Antananarivo, Madagascar',
+  linkedin: 'https://www.linkedin.com/in/audace-rabarison/',
+  whatsapp: 'https://wa.me/261347650918',
+  phoneHref: 'tel:+261347650918',
 }
 
 export const experiences = [
@@ -110,19 +113,13 @@ export const skills = [
     ],
   },
   {
-    categoryKey: 'Design',
-    category: 'Design',
-    items: [
-      { name: 'Figma', proficiency: 70 },
-    ],
-  },
-  {
     categoryKey: 'Outils & Autres',
     category: 'Outils & Autres',
     items: [
       { name: 'Git', proficiency: 85 },
       { name: 'Azure DevOps', proficiency: 80 },
       { name: 'Docker', proficiency: 70 },
+      { name: 'Figma', proficiency: 70 },
     ],
   },
 ]
@@ -131,3 +128,44 @@ export const languages = {
   fr: 'Français',
   en: 'English',
 }
+
+// Métadonnées des projets (l'ordre correspond à t.projects.data)
+export const projects = [
+  {
+    id: 'payroll',
+    icon: 'briefcase',
+    category: 'enterprise',
+    stack: ['C#', '.NET', 'SQL Server', 'Angular', 'TypeScript'],
+  },
+  {
+    id: 'grading',
+    icon: 'bot',
+    category: 'ai',
+    stack: ['React', 'Python', 'FastAPI', 'Oracle', 'Jupyter Lab', 'TensorFlow'],
+  },
+  {
+    id: 'ticketing',
+    icon: 'ticket',
+    category: 'transport',
+    stack: ['C#', '.NET', '.NET Framework', 'Vue.js', 'Oracle', 'TDump Studio'],
+  },
+  {
+    id: 'invoicing',
+    icon: 'receipt',
+    category: 'enterprise',
+    stack: ['C#', '.NET', 'SQL Server', 'React'],
+  },
+]
+
+export const keyTechnologies = [
+  'C# / .NET',
+  'Entity Framework',
+  'Angular',
+  'React',
+  'Vue.js',
+  'TypeScript',
+  'Oracle PL/SQL',
+  'SQL Server',
+  'Docker',
+  'Azure DevOps',
+]

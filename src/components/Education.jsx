@@ -1,34 +1,30 @@
 import { educations } from '../data'
 import Reveal from './Reveal'
+import Icon from './Icon'
+import SectionHeader from './SectionHeader'
 import { useLanguage } from '../contexts/LanguageContext'
+
+const icons = ['school', 'scroll']
 
 export default function Education() {
   const { t, lang } = useLanguage()
   return (
-    <section id="education" className="py-24 bg-slate-50 dark:bg-surface/50">
-      <div className="max-w-6xl mx-auto px-6">
-        <Reveal>
-          <h3 className="text-amber-700 dark:text-accent-cyan font-medium tracking-widest uppercase text-sm mb-2">
-            {t.education.kicker}
-          </h3>
-          <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-12">{t.education.title}</h2>
+    <section id="education" className="section" aria-labelledby="education-title">
+      <div className="container-page">
+        <Reveal className="mb-10">
+          <SectionHeader id="education-title" kicker={t.education.kicker} title={t.education.title} />
         </Reveal>
 
-        <div className="grid sm:grid-cols-2 gap-6">
-          {educations.map((ed) => (
-            <Reveal
-              key={ed.degree[lang]}
-              className="glass rounded-3xl p-6 flex items-start gap-4 hover:shadow-xl dark:hover:bg-white/10 active:scale-[0.99] transition-shadow dark:transition-colors"
-            >
-              <span className="text-3xl" aria-hidden="true">
-                🎓
-              </span>
-              <div>
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{ed.degree[lang]}</h3>
-                <p className="text-slate-600 dark:text-slate-300">{ed.school[lang]}</p>
-                <span className="inline-block mt-2 text-sm text-amber-700 dark:text-accent-cyan font-medium">
-                  {ed.period}
-                </span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {educations.map((ed, i) => (
+            <Reveal key={ed.degree[lang]} className="p-7 card flex items-start gap-4">
+              <div className="icon-tile">
+                <Icon name={icons[i] ?? 'school'} size={22} />
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="font-mono text-xs text-subtle font-semibold">{ed.period}</span>
+                <h3 className="font-serif text-xl text-graphite font-bold">{ed.degree[lang]}</h3>
+                <p className="text-sm text-muted">{ed.school[lang]}</p>
               </div>
             </Reveal>
           ))}
